@@ -213,7 +213,7 @@ route.get('/:id', (req, res) => {
  *                      type: object
  *                      $ref: '#/components/schemas/LineaBody'
  *      responses:
- *          200:
+ *          201:
  *              description: Linea creada.
  *              content:
  *                  application/json:

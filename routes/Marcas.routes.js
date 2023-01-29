@@ -211,7 +211,7 @@ route.get('/:id', (req, res) => {
  *                      type: object
  *                      $ref: '#/components/schemas/MarcaBody'
  *      responses:
- *          200:
+ *          201:
  *              description: Marca creada.
  *              content:
  *                  application/json:

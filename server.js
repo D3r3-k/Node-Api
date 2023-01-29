@@ -11,8 +11,8 @@ const swaggerSpec = {
     definition: {
         openapi: "3.0.0",
         info: {
-            title: "Deportes S.A. API",
-            description: "Proyecto API - Level Up",
+            title: "Proyecto API - Level Up",
+            description: "API de Deportes S.A.",
             version: "1.0.0"
         }
     },

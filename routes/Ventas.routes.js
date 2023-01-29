@@ -95,8 +95,8 @@ route.get('/', (req, res) => {
  *                      schema:
  *                          type: object
  *                          $ref: '#/components/schemas/AuthDenied'
- *          200:
- *              description: Productos ingresados exitosamente.
+ *          201:
+ *              description: Venta exitosa.
  */
 //* HACER UNA VENTA
 route.post('/', (req, res) => {

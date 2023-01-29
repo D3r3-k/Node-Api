@@ -239,7 +239,7 @@ route.get('/:id', (req, res) => {
  *                      type: object
  *                      $ref: '#/components/schemas/ProductoBody'
  *      responses:
- *          200:
+ *          201:
  *              description: Producto creado.
  *              content:
  *                  application/json:
