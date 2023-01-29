@@ -2,14 +2,105 @@ const { Router } = require('express')
 const { ventas_api, inventario_api } = require('../apis/productosAPI')
 const route = Router()
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Lista-Ventas:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: integer
+ *                  description: ID de la venta.
+ *              productos:
+ *                  type: array
+ *                  description: Lista de productos vendidos.
+ *                  items:
+ *                      type: object
+ *                      description: Lista de productos vendidos.
+ *              total:
+ *                  type: integer
+ *                  description: Precio total de los productos.
+ *          example:
+ *              id: 1
+ *              productos: [{"id": 5040646,"cantidad": 2,"subtotal": 220}]
+ *              total: 220
+ *      Agregar-Venta:
+ *          example:
+ *              id: 1
+ *              cantidad: 4
+ */
+/**
+ * @swagger
+ * /api/ventas:
+ *  get:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Ver historial de ventas.
+ *      tags: [Ventas]
+ *      responses:
+ *          200:
+ *              description: Historial de los productos ingresados.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Lista-Ingresos'
+ *          400:
+ *              description: Token invalido.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/NoTokenAccess'
+ *          401:
+ *              description: Usuario no autorizado.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/AuthDenied'
+ */
 //* VER TODAS LAS VENTAS
 route.get('/', (req, res) => {
     res.status(200).json(ventas_api)
 })
 
+/**
+ * @swagger
+ * /api/ventas:
+ *  post:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Agrega una lista de productos al inventario.
+ *      tags: [Ventas]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                        $ref: '#/components/schemas/Agregar-Venta'
+ *      responses:
+ *          500:
+ *              description: Error al ingresar productos.
+ *          400:
+ *              description: Lista de productos vacia.
+ *          401:
+ *              description: Usuario no autorizado.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/AuthDenied'
+ *          200:
+ *              description: Productos ingresados exitosamente.
+ */
 //* HACER UNA VENTA
 route.post('/', (req, res) => {
-    const { productos } = req.body
+    const productos = req.body
     if (productos.length === 0) return res.status(400).json({ message: 'Empty Sales' })
     const error = []
     const success = []

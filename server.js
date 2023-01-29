@@ -1,24 +1,40 @@
 const express = require('express')
-const app = express()
 const morgan = require('morgan')
 const { validateToken } = require('./middlewares/mwAccessToken')
+const path = require('path')
+const port = process.env.PORT || 3000
 
-//?: CONGIS
+//?: SWAGGER
+const swaggerUI = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerSpec = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Deportes S.A. API",
+            description: "Proyecto API - Level Up",
+            version: "1.0.0"
+        }
+    },
+    apis: [`${path.join(__dirname, "./routes/*.js")}`],
+}
+
+//?: SETTINGS
+const app = express()
 require('dotenv').config()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-const port = process.env.PORT || 3000
-
-// *: ROUTES
+//?: MIDDLEWARE
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
 app.use('/', require('./routes/Index.routes'))
-app.use('/auth', require('./routes/Auth.routes'))
-app.use('/lineas', validateToken, require('./routes/Lineas.routes'))
-app.use('/marcas', validateToken, require('./routes/Marcas.routes'))
-app.use('/inventario', validateToken, require('./routes/Inventario.routes'))
-app.use('/ingresos', validateToken, require('./routes/Ingresos.routes'))
-app.use('/ventas', validateToken, require('./routes/Ventas.routes'))
+app.use('/api/auth', require('./routes/Auth.routes'))
+app.use('/api/lineas', validateToken, require('./routes/Lineas.routes'))
+app.use('/api/marcas', validateToken, require('./routes/Marcas.routes'))
+app.use('/api/inventario', validateToken, require('./routes/Inventario.routes'))
+app.use('/api/ingresos', validateToken, require('./routes/Ingresos.routes'))
+app.use('/api/ventas', validateToken, require('./routes/Ventas.routes'))
 app.use('*', require('./routes/NotFound.routes'))
 
 app.listen(port, () => {

@@ -59,11 +59,8 @@ const marcas_api = [
     }
 ]
 
-const inventario_api = [
-]
+const inventario_api = []
+const ingresos_api = []
+const ventas_api = []
 
-const ingresos_api = [
-]
-const ventas_api = [
-]
 module.exports = { lineas_api, marcas_api, inventario_api, ingresos_api, ventas_api }

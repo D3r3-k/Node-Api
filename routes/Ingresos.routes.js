@@ -2,14 +2,115 @@ const { Router } = require('express')
 const { ingresos_api, inventario_api } = require('../apis/productosAPI')
 const route = Router()
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *      Lista-Ingresos:
+ *          type: object
+ *          properties:
+ *              id:
+ *                  type: integer
+ *                  description: ID de ingreso al inventario.
+ *              fecha:
+ *                  type: string
+ *                  format: date
+ *                  description: Fecha de ingreso..
+ *              productos:
+ *                  type: array
+ *                  description: Lista de productos ingresados al inventario.
+ *                  items:
+ *                      type: object
+ *          example:
+ *              id: 1
+ *              fecha: "Sat Jan 30"
+ *              productos: [{id_producto: 4010436, cantidad: 12 },{id_producto: 5070852, cantidad: 442 }]
+ *      Agregar-Ingresos:
+ *          type: object
+ *          properties:
+ *              id_producto:
+ *                  type: integer
+ *                  description: ID del producto almacenado en el inventario.
+ *              cantidad:
+ *                  type: integer
+ *                  description: Cantidad de productos para agregar al inventario.
+ *          example:
+ *              id_producto: 4010436
+ *              cantidad: 12
+ */
+
+
+/**
+ * @swagger
+ * /api/ingresos:
+ *  get:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Ver historial de ingresos.
+ *      tags: [Ingresos]
+ *      responses:
+ *          200:
+ *              description: Historial de los productos ingresados.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Lista-Ingresos'
+ *          400:
+ *              description: Token invalido.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/NoTokenAccess'
+ *          401:
+ *              description: Usuario no autorizado.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/AuthDenied'
+ */
 //* VER INGRESOS
 route.get('/', (req, res) => {
     res.status(200).json(ingresos_api)
 })
 
+/**
+ * @swagger
+ * /api/ingresos:
+ *  post:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Agrega una lista de productos al inventario.
+ *      tags: [Ingresos]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      items:
+ *                        $ref: '#/components/schemas/Agregar-Ingresos'
+ *      responses:
+ *          500:
+ *              description: Error al ingresar productos.
+ *          400:
+ *              description: Lista de productos vacia.
+ *          401:
+ *              description: Usuario no autorizado.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          $ref: '#/components/schemas/AuthDenied'
+ *          200:
+ *              description: Productos ingresados exitosamente.
+ */
 //* AGREGAR AL INVENTARIO
 route.post('/', (req, res) => {
-    const { productos } = req.body
+    const productos = req.body
     if (!productos || productos.length === 0) return res.status(400).json({ message: 'Product id empty' })
     const error = []
     const success = []
