@@ -47,24 +47,6 @@ const route = Router()
  *              - id
  *          example:
  *              id: 54521
- *      Marca:
- *          type: object
- *          example:
- *              id: 1
- *              marca: New Era
- *              activo: true
- *      MarcaNotFound:
- *          type: object
- *          example:
- *              message: "Product Brand not Found"
- *      MarcaUpdateSuccess:
- *          type: object
- *          example:
- *              message: "Product Brand Update Success"
- *      MarcaDeleteSuccess:
- *          type: object
- *          example:
- *              message: "Product Brand Deleted"
  */
 
 /**
@@ -78,26 +60,10 @@ const route = Router()
  *      responses:
  *          200:
  *              description: Mostrar lista de marcas (incluyendo eliminados).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Marca'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 //*(GET)        VER TODOS (INCLUYENDO ELIMINADOS)
 route.get('/', (req, res) => {
@@ -115,26 +81,10 @@ route.get('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar lista de marcas (solo activos).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Marca'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 //*(GET)        VER TODOS LOS ACTIVOS
 route.get('/activos', (req, res) => {
@@ -160,32 +110,12 @@ route.get('/activos', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar marca segun su id.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Marca'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Producto no encontrado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/MarcaNotFound'
  */
 //*(GET)        VER DADO UN ID
 route.get('/:id', (req, res) => {
@@ -213,25 +143,10 @@ route.get('/:id', (req, res) => {
  *      responses:
  *          201:
  *              description: Marca creada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Marca'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 //*(POST)       CREAR
 route.post('/', (req, res) => {
@@ -266,32 +181,12 @@ route.post('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Marca actualizada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/MarcaUpdateSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Datos vacios o no encontrados.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/MarcaNotFound'
  */
 //*(PUT)        EDITAR
 route.put('/', (req, res) => {
@@ -328,32 +223,12 @@ route.put('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Marca Borrada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/MarcaDeleteSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: La Marca no existe.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/MarcaNotFound'
  */
 //*(DELETE)     ELIMINACION SUAVE
 route.delete('/', (req, res) => {

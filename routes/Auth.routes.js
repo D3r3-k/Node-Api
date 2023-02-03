@@ -29,23 +29,6 @@ const usuarios_db = require('../apis/dbUsuarios.json')
  *          example:
  *              email: "admin@gmail.com"
  *              password: "000"
- *      Auth:
- *          type: object
- *          example:
- *              message: "Authentication User"
- *              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluaXN0cmFkb3IiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMDAwIiwiaWF0IjoxNjc0OTY0OTI1LCJleHAiOjE2NzUwNTEzMjV9.0HybQPUfVpGNYr2jvomUOY1l89BP8DIu434eVaD33sc"
- *      AuthNotFound:
- *          type: object
- *          example:
- *              message: "User not Found"
- *      AuthDenied:
- *          type: object
- *          example:
- *              message: "Access denied"
- *      NoTokenAccess:
- *          type: object
- *          example:
- *              message: "Access denied, Token expired or Incorrect"
  */
 
 
@@ -65,18 +48,8 @@ const usuarios_db = require('../apis/dbUsuarios.json')
  *      responses:
  *          200:
  *              description: Usuario autenticado
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Auth'
  *          404:
  *              description: Usuario no encontrado
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthNotFound'
  */
 route.post('/', (req, res) => {
     const { email, password } = req.body

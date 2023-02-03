@@ -71,27 +71,6 @@ const route = Router()
  *              - id
  *          example:
  *              id: 54521
- *      Producto:
- *          type: object
- *          example:
- *              id: 1
- *              marca: 4
- *              linea: 3
- *              precio: 100
- *              stock: 25
- *              activo: true
- *      ProductoNotFound:
- *          type: object
- *          example:
- *              message: "Product not Found"
- *      ProductoUpdateSuccess:
- *          type: object
- *          example:
- *              message: "Product Update Success"
- *      ProductoDeleteSuccess:
- *          type: object
- *          example:
- *              message: "Product Deleted"
  */
 //*(GET)        VER TODOS (INCLUYENDO ELIMINADOS)
 //*(GET)        VER TODOS LOS ACTIVOS
@@ -110,26 +89,10 @@ const route = Router()
  *      responses:
  *          200:
  *              description: Mostrar lista del inventario (incluyendo eliminados).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Producto'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 route.get('/', (req, res) => {
     res.status(200).json(inventario_api)
@@ -145,26 +108,10 @@ route.get('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar lista del inventario (solo activos).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Producto'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 route.get('/activos', (req, res) => {
     const inventarioActivo = inventario_api.filter(item => item.activo === true)
@@ -189,32 +136,12 @@ route.get('/activos', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar producto segun su id.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Producto'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Producto no encontrado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoNotFound'
  */
 route.get('/:id', (req, res) => {
     const { id } = req.params
@@ -241,32 +168,12 @@ route.get('/:id', (req, res) => {
  *      responses:
  *          201:
  *              description: Producto creado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Producto'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Producto, Marca o Linea no encontrada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoNotFound'
  */
 route.post('/', (req, res) => {
     const { marca: marca_id, linea: linea_id, precio, stock } = req.body
@@ -304,32 +211,12 @@ route.post('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Producto actualizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoUpdateSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Datos vacios o no encontrados.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoNotFound'
  */
 route.put('/', (req, res) => {
     const { id, data } = req.body
@@ -374,32 +261,12 @@ route.put('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Producto Borrado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoDeleteSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: El producto no existe.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/ProductoNotFound'
  */
 route.delete('/', (req, res) => {
     const { id } = req.body

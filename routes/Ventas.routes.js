@@ -6,26 +6,15 @@ const route = Router()
  * @swagger
  * components:
  *  schemas:
- *      Lista-Ventas:
+ *      Agregar-Venta:
  *          type: object
  *          properties:
  *              id:
  *                  type: integer
- *                  description: ID de la venta.
- *              productos:
- *                  type: array
- *                  description: Lista de productos vendidos.
- *                  items:
- *                      type: object
- *                      description: Lista de productos vendidos.
- *              total:
+ *                  description: ID del producto.
+ *              cantidad:
  *                  type: integer
- *                  description: Precio total de los productos.
- *          example:
- *              id: 1
- *              productos: [{"id": 5040646,"cantidad": 2,"subtotal": 220}]
- *              total: 220
- *      Agregar-Venta:
+ *                  description: Cantidad de productos
  *          example:
  *              id: 1
  *              cantidad: 4
@@ -41,26 +30,10 @@ const route = Router()
  *      responses:
  *          200:
  *              description: Historial de los productos ingresados.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Lista-Ingresos'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 //* VER TODAS LAS VENTAS
 route.get('/', (req, res) => {
@@ -90,11 +63,6 @@ route.get('/', (req, res) => {
  *              description: Lista de productos vacia.
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          201:
  *              description: Venta exitosa.
  */

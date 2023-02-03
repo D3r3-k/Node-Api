@@ -6,25 +6,6 @@ const route = Router()
  * @swagger
  * components:
  *  schemas:
- *      Lista-Ingresos:
- *          type: object
- *          properties:
- *              id:
- *                  type: integer
- *                  description: ID de ingreso al inventario.
- *              fecha:
- *                  type: string
- *                  format: date
- *                  description: Fecha de ingreso..
- *              productos:
- *                  type: array
- *                  description: Lista de productos ingresados al inventario.
- *                  items:
- *                      type: object
- *          example:
- *              id: 1
- *              fecha: "Sat Jan 30"
- *              productos: [{id_producto: 4010436, cantidad: 12 },{id_producto: 5070852, cantidad: 442 }]
  *      Agregar-Ingresos:
  *          type: object
  *          properties:
@@ -51,26 +32,10 @@ const route = Router()
  *      responses:
  *          200:
  *              description: Historial de los productos ingresados.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Lista-Ingresos'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 //* VER INGRESOS
 route.get('/', (req, res) => {
@@ -100,11 +65,6 @@ route.get('/', (req, res) => {
  *              description: Lista de productos vacia.
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          200:
  *              description: Productos ingresados exitosamente.
  */

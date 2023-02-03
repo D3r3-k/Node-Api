@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const { validateToken } = require('./middlewares/mwAccessToken')
 const path = require('path')
 const port = process.env.PORT || 3000
@@ -25,6 +26,7 @@ require('dotenv').config()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 //?: MIDDLEWARE
 app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))

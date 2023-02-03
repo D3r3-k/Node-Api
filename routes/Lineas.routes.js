@@ -46,24 +46,6 @@ const route = Router()
  *              - id
  *          example:
  *              id: 54521
- *      Linea:
- *          type: object
- *          example:
- *              id: 1
- *              linea: Playera
- *              activo: true
- *      LineaNotFound:
- *          type: object
- *          example:
- *              message: "Product Line not Found"
- *      LineaUpdateSuccess:
- *          type: object
- *          example:
- *              message: "Product Line Update Success"
- *      LineaDeleteSuccess:
- *          type: object
- *          example:
- *              message: "Product Line Deleted"
  */
 //*(GET)        VER TODOS (INCLUYENDO ELIMINADOS)
 //*(GET)        VER TODOS LOS ACTIVOS
@@ -83,26 +65,10 @@ const route = Router()
  *      responses:
  *          200:
  *              description: Mostrar lista de lineas de productos (incluyendo eliminados).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Linea'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 route.get('/', (req, res) => {
     res.status(200).json(lineas_api)
@@ -119,26 +85,10 @@ route.get('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar lista de lineas (solo activos).
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/Linea'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 route.get('/activos', (req, res) => {
     const lineasActivas = lineas_api.filter(item => item.activo === true)
@@ -163,32 +113,12 @@ route.get('/activos', (req, res) => {
  *      responses:
  *          200:
  *              description: Mostrar linea de producto segun su id.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Linea'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Producto no encontrado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/LineaNotFound'
  */
 route.get('/:id', (req, res) => {
     const { id } = req.params
@@ -215,25 +145,10 @@ route.get('/:id', (req, res) => {
  *      responses:
  *          201:
  *              description: Linea creada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/Linea'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  */
 route.post('/', (req, res) => {
     const { linea } = req.body
@@ -267,32 +182,12 @@ route.post('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Linea actualizada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/LineaUpdateSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: Datos vacios o no encontrados.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/LineaNotFound'
  */
 route.put('/', (req, res) => {
     const { id, data } = req.body
@@ -329,32 +224,12 @@ route.put('/', (req, res) => {
  *      responses:
  *          200:
  *              description: Linea Borrada.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/LineaDeleteSuccess'
  *          400:
  *              description: Token invalido.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/NoTokenAccess'
  *          401:
  *              description: Usuario no autorizado.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/AuthDenied'
  *          404:
  *              description: La linea no existe.
- *              content:
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          $ref: '#/components/schemas/LineaNotFound'
  */
 route.delete('/', (req, res) => {
     const { id } = req.body
